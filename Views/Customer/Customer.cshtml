@@ -1,0 +1,29 @@
+﻿@using AjaxTutorial.Models
+@model Tuple<List<Customer>, Customer>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+
+    var selected = false;
+
+    foreach (var customer in Model.Item1)
+    {
+        if (Model.Item1.IndexOf(customer) == 0)
+        {
+            selected = true;
+        }
+
+        @Html.RadioButton("CustomerNumber", customer.ID, false);
+        @Html.Label(customer.Name);
+        <br />
+    }
+    <input type="submit" id="SubmitButton" value="Display Details" /> 
+}
+<!--    Insert a partial view here.
+        Show customer details.
+        Pass the second item of the tuple model-->
