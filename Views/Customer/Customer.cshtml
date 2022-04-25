@@ -10,31 +10,33 @@
         UpdateTargetId = "customerInfo"
     };
 }
-
-@using (Ajax.BeginForm("OnSelectCustomer", "Customer", ajaxOptions, new { id = "customerForm" }))
-{
-    @Html.AntiForgeryToken();
-
-    var selected = false;
-
-    foreach (var customer in Model.Item1)
+<div class="container  p-2 m-1">
+    @using (Ajax.BeginForm("OnSelectCustomer", "Customer", ajaxOptions, new { id = "customerForm" }))
     {
-        if (Model.Item2 == customer)
-        {
-            selected = true;
-        }
-        else
-        {
-            selected = false;
-        }
+        @Html.AntiForgeryToken();
 
-        @Html.RadioButton("CustomerNumber", customer.ID, selected,
-                 new { onchange = "$('#customerForm').trigger('submit')" });
-        @Html.Label(customer.Name);
-        <br/>
+        var selected = false;
+
+        foreach (var customer in Model.Item1)
+        {
+            
+                if (Model.Item2 == customer)
+                {
+                selected = true;
+                }
+                else
+                {
+                selected = false;
+                }
+
+                @Html.RadioButton("CustomerNumber", customer.ID, selected,
+                         new { onchange = "$('#customerForm').trigger('submit')" });
+                @Html.Label(customer.Name);
+                <br />
+            
+        }
     }
-}
-
+</div>
 <!--    Insert a partial view here.
         Show customer details.
         Pass the second item of the tuple model-->
