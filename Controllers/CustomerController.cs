@@ -17,7 +17,7 @@ namespace AjaxTutorial.Controllers
         {
             customers = new List<Customer>();
             customers.Add(new Customer(0, "Sherry", 37));
-            customers.Add(new Customer(1, "Time", 32));
+            customers.Add(new Customer(1, "Tim", 32));
             customers.Add(new Customer(2, "Charlene", 27));
             customers.Add(new Customer(3, "Jerry", 34));
             customers.Add(new Customer(4, "Barry", 87));
@@ -35,5 +35,18 @@ namespace AjaxTutorial.Controllers
 
             return View("Customer", tuple);
         }
+
+
+        //  customerNumber comes from the radio button
+        public ActionResult OnSelectCustomer(string CustomerNumber)
+        {
+            Tuple<List<Customer>, Customer> tuple;
+            tuple = new Tuple<List<Customer>, Customer>(customers, customers[Int32.Parse(CustomerNumber)]);
+
+            return View("Customer", tuple);
+        }
+
+
+
     }
 }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("OnSelectCustomer", "Customer"))
 {
     @Html.AntiForgeryToken();
 
@@ -13,12 +13,16 @@
 
     foreach (var customer in Model.Item1)
     {
-        if (Model.Item1.IndexOf(customer) == 0)
+        if (Model.Item2 == customer)
         {
             selected = true;
         }
+        else
+        {
+            selected = false;
+        }
 
-        @Html.RadioButton("CustomerNumber", customer.ID, false);
+        @Html.RadioButton("CustomerNumber", customer.ID, selected);
         @Html.Label(customer.Name);
         <br />
     }
@@ -27,3 +31,6 @@
 <!--    Insert a partial view here.
         Show customer details.
         Pass the second item of the tuple model-->
+<div id="customerInfo">
+    @Html.Partial("~/Views/Shared/_CustomerDetails.cshtml", Model.Item2)
+</div>
