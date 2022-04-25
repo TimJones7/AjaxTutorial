@@ -11,7 +11,7 @@
     };
 }
 
-@using (Ajax.BeginForm("OnSelectCustomer", "Customer", ajaxOptions))
+@using (Ajax.BeginForm("OnSelectCustomer", "Customer", ajaxOptions, new { id = "customerForm" }))
 {
     @Html.AntiForgeryToken();
 
@@ -28,12 +28,13 @@
             selected = false;
         }
 
-        @Html.RadioButton("CustomerNumber", customer.ID, selected);
+        @Html.RadioButton("CustomerNumber", customer.ID, selected,
+                 new { onchange = "$('#customerForm').trigger('submit')" });
         @Html.Label(customer.Name);
-        <br />
+        <br/>
     }
-    <input type="submit" id="SubmitButton" value="Display Details" /> 
 }
+
 <!--    Insert a partial view here.
         Show customer details.
         Pass the second item of the tuple model-->
